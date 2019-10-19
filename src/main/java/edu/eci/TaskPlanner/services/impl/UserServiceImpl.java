@@ -1,62 +1,50 @@
-package edu.eci.TaskPlanner.services.impl;
+package edu.eci.TaskPlanner.Services.Impl;
+
+import edu.eci.TaskPlanner.Model.User;
+import edu.eci.TaskPlanner.Services.UserService;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import edu.eci.TaskPlanner.entities.Task;
-import edu.eci.TaskPlanner.entities.User;
-import edu.eci.TaskPlanner.services.UserService;
+@Service
+public class UserServiceImpl implements UserService {
 
-public class UserServiceImpl implements UserService{
+    private Map<String, User> users = new HashMap<>();
 
-	private Map<Integer, User> users = new HashMap<>();
-		
-	
-	@Override
-	public List<User> getUsers() {
-		List<User> list = new ArrayList<>();
-        for (int id : users.keySet()) {
-            list.add(users.get(id));
+    @Override
+    public List<User> getUsersList() {
+        List<User> usersList = new ArrayList<>();
+        for (String userId : users.keySet()) {
+            usersList.add(users.get(userId));
         }
-        return list;
-	}
+        return usersList;
+    }
 
-	@Override
-	public User getUserById(int userId) {
-		return users.get(userId);
-	}
+    @Override
+    public User getUserById(String userId) {
+        return users.get(userId);
+    }
 
-	@Override
-	public User getUserByUsername(String username) {
-		for (int id : users.keySet()) {
-			if (users.get(id).getUsername()== username) {
-				return users.get(id);
-			}
-        }
-		return null;
-	}
+    @Override
+    public User createUser(User user) {
+        user.setId(users.size() + 1);
+        String userId = String.valueOf(user.getId());
+        users.put(userId, user);
+        return users.get(userId);
+    }
 
-	@Override
-	public User addUser(User user) {
-		int id=user.getId();
-		users.put(id, user);
-		return users.get(id);
-	}
+    @Override
+    public User updateUser(User user) {
+        String userId = String.valueOf(user.getId());
+        users.replace(userId, user);
+        return users.get(userId);
+    }
 
-	@Override
-	public User updateUser(User user) {
-		int id=user.getId();
-		users.replace(id, user);
-		return users.get(id);
-	}
-
-	@Override
-	public User deleteUser(int userId) {
-		User temp= users.get(userId);
-		users.remove(userId);
-		return temp;
-	}
-
+    @Override
+    public void removeUser(String userId) {
+        users.remove(userId);
+    }
 }

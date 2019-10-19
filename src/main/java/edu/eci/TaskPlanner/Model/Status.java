@@ -1,4 +1,4 @@
-package edu.eci.TaskPlanner.entities;
+package edu.eci.TaskPlanner.Model;
 
 public enum Status {
     READY,
