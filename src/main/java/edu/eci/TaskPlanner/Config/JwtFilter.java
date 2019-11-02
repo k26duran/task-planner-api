@@ -20,7 +20,9 @@ public class JwtFilter extends GenericFilterBean {
         final HttpServletRequest request = (HttpServletRequest) servletRequest;
         final HttpServletResponse response = (HttpServletResponse) servletResponse;
         final String authHeader = request.getHeader("Authorization");
-
+        System.out.println("-------------------");
+        System.out.println(authHeader);
+        
         if ("OPTIONS".equals(request.getMethod())) {
             response.setStatus(HttpServletResponse.SC_OK);
             filterChain.doFilter(servletRequest, response);
