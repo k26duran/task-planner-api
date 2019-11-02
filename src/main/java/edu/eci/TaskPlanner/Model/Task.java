@@ -1,17 +1,23 @@
 package edu.eci.TaskPlanner.Model;
 
-public class Task {
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document
+public class Task {
+	@Id
     private int id;
+	
     private String title;
     private String description;
     private String dueDate;
     private Status status;
     private User responsible;
     private int priority;
+    private String fileURL;
 
 
-    public Task(int id, String title, String description, String dueDate, Status status, User responsible, int priority) {
+    public Task(int id, String title, String description, String dueDate, Status status, User responsible, int priority, String fileURL) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -19,7 +25,10 @@ public class Task {
         this.status = status;
         this.responsible = responsible;
         this.priority = priority;
+        this.fileURL = fileURL;
     }
+    
+    public Task() {}
 
     public int getId() {
         return id;
@@ -76,4 +85,20 @@ public class Task {
     public void setResponsible(User responsible) {
         this.responsible = responsible;
     }
+
+	public String getFileURL() {
+		return fileURL;
+	}
+
+	public void setFileURL(String fileURL) {
+		this.fileURL = fileURL;
+	}
+
+	@Override
+	public String toString() {
+		return "Task [id=" + id + ", title=" + title + ", description=" + description + ", dueDate=" + dueDate
+				+ ", status=" + status + ", responsible=" + responsible + ", priority=" + priority + ", fileURL="
+				+ fileURL + "]";
+	}
+    
 }

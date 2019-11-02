@@ -28,26 +28,25 @@ public class UserController {
     public Token login(@RequestBody User userLogin) throws ServletException {
         String jwtToken = "";
         if ((userLogin.getEmail() == null && userLogin.getUsername() == null) || userLogin.getPassword() == null) {
-            throw new ServletException("Please fill in email or username, and password");
+            throw new ServletException("Please try again!");
         }
         String email = userLogin.getEmail();
         String username = userLogin.getUsername();
         String password = userLogin.getPassword();
         User user = null;
-        if (email != null) {
-            user = userService.getUserByEmail(email);
-        } else if (username != null) {
-            user = userService.getUserByUsername(username);
-        }
-        if (user == null) {
-            throw new ServletException("User not found.");
-        }
+        
+        if (email != null) user = userService.getUserByEmail(email);
+        
+        else if (username != null) user = userService.getUserByUsername(username);
+ 
+        if (user == null) throw new ServletException("Not found USER");
+        
         String pwd = user.getPassword();
-        if (!password.equals(pwd)) {
-            throw new ServletException("Invalid login. Please check your name and password.");
-        }
-        jwtToken = Jwts.builder().setSubject(username).claim("roles", "user").setIssuedAt(new Date()).signWith(
-                SignatureAlgorithm.HS256, "secretkey").compact();
+        
+        if (!password.equals(pwd)) throw new ServletException("Something wrong, checkout your credentials");
+        
+        jwtToken = Jwts.builder().setSubject(username).claim("roles", "user").setIssuedAt(new Date()).signWith(SignatureAlgorithm.HS256, "secretkey").compact();
+        
         return new Token(jwtToken);
     }
     

@@ -10,5 +10,5 @@ public interface TaskRepository extends MongoRepository<Task, Integer> {
 
     Task findById(int id);
 
-    List<Task> findByResponsible_Email(String responsibleEmail);
+    List<Task> findByResponsibleEmail(String responsibleEmail);
 }

@@ -1,10 +1,17 @@
 package edu.eci.TaskPlanner.Model;
 
-public class User {
+import java.util.Arrays;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document
+public class User {
+	@Id
     private int id;
+	
+	private String username;
     private String name;
-    private String username;
     private String email;
     private String password;
     private byte[] avatar;
@@ -68,4 +75,11 @@ public class User {
     public void setAvatar(byte[] avatar) {
         this.avatar = avatar;
     }
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", username=" + username + ", email=" + email + ", password="
+				+ password + ", avatar=" + Arrays.toString(avatar) + "]";
+	}
+    
 }
