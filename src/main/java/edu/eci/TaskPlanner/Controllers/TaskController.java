@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/taskPlanner")
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3000")
 public class TaskController {
 
     @Autowired

@@ -10,8 +10,6 @@ public class Task {
     private User responsible;
     private int priority;
 
-    public Task() {
-    }
 
     public Task(int id, String title, String description, String dueDate, Status status, User responsible, int priority) {
         this.id = id;

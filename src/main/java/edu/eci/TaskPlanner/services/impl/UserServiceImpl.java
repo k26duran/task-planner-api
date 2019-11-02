@@ -27,7 +27,34 @@ public class UserServiceImpl implements UserService {
     public User getUserById(String userId) {
         return users.get(userId);
     }
+    
+    @Override
+    public User getUserByEmail(String email) {
+        User user = null;
+        User userTemp = null;
+        for (String userId : users.keySet()) {
+            userTemp = users.get(userId);
+            if (email.equals(userTemp.getEmail())) {
+                user = userTemp;
+                break;
+            }
+        }
+        return user;
+    }
 
+    @Override
+    public User getUserByUsername(String username) {
+        User user = null;
+        User userTemp = null;
+        for (String userId : users.keySet()) {
+            userTemp = users.get(userId);
+            if (username.equals(userTemp.getUsername())) {
+                user = userTemp;
+                break;
+            }
+        }
+        return user;
+    }
     @Override
     public User createUser(User user) {
         user.setId(users.size() + 1);
@@ -35,7 +62,7 @@ public class UserServiceImpl implements UserService {
         users.put(userId, user);
         return users.get(userId);
     }
-
+    
     @Override
     public User updateUser(User user) {
         String userId = String.valueOf(user.getId());
