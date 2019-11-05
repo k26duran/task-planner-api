@@ -49,7 +49,7 @@ public class TaskPlannerApplication implements CommandLineRunner{
     public FilterRegistrationBean jwtFilter() {
         final FilterRegistrationBean registrationBean = new FilterRegistrationBean();
         registrationBean.setFilter(new JwtFilter());
-        registrationBean.addUrlPatterns( "/taskPlanner/v1/tasks/*","/taskPlanner/v1/users/*","/taskPlanner/v1/files/*");
+        registrationBean.addUrlPatterns( "/taskPlanner/v1/tasks/*","/taskPlanner/v1/users/*");
         return registrationBean;
     }
 	
@@ -65,10 +65,10 @@ public class TaskPlannerApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-		
+		/*
 		ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfiguration.class);
 		MongoOperations mongoOperation = (MongoOperations) applicationContext.getBean("mongoTemplate");
-		/*
+		
 		userRepository.deleteAll();
         User user1 = new User(1, "Karen Duran", "k26duran", "k26duran@mail.com", "99999", null);
         userRepository.save(user1);

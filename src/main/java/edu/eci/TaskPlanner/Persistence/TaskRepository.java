@@ -9,6 +9,9 @@ import edu.eci.TaskPlanner.Model.Task;
 public interface TaskRepository extends MongoRepository<Task, Integer> {
 
     Task findById(int id);
-
+    
     List<Task> findByResponsibleEmail(String responsibleEmail);
+    
+    List<Task> findByResponsible(int id);
+
 }
